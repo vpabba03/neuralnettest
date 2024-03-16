@@ -9,22 +9,39 @@ let model2;
 import {drawGraph} from './script.js';
 
 
-window.addEventListener('DOMContentLoaded', (event) => {
-    // Event listener for changes in the number of nodes
-    document.getElementById("nodesDropdown3").addEventListener("change", function () {
-        nodesValue2[0] = parseInt(this.value);
-        draw2();
-    })
-    document.getElementById("nodesDropdown4").addEventListener("change", function () {
-        nodesValue2[1] = parseInt(this.value);
-        draw2();
-    });
+function updateHiddenLayers() {
+    hiddenLayersValue2 = parseInt(document.getElementById("hiddenLayersDropdown").value);
+    draw2(); // Redraw the network graph with updated values
 
-    document.getElementById("nodesDropdown5").addEventListener("change", function () {
-        nodesValue2[2] = parseInt(this.value);
-        draw2();
-    });
+    // Create node dropdowns based on the selected number of hidden layers
+    let nodeDropdownContainer = document.getElementById("nodeDropdownContainer");
+    nodeDropdownContainer.innerHTML = ""; // Clear previous dropdowns
+    
+    for (let i = 0; i < hiddenLayersValue2; i++) {
+        let nodeDropdown = document.createElement("select");
+        nodeDropdown.id = "nodesDropdown" + (i + 3); // Start from 3 to match existing dropdown IDs
+        nodeDropdown.addEventListener("change", function () {
+            nodesValue2[i] = parseInt(this.value);
+            draw2();
+        });
+
+        // Populate options for the node dropdowns
+        for (let j = 1; j <= 16; j++) { // Adjust the maximum number of nodes as needed
+            let option = document.createElement("option");
+            option.value = j;
+            option.textContent = j;
+            nodeDropdown.appendChild(option);
+        }
+
+        nodeDropdownContainer.appendChild(nodeDropdown);
+    }
+}
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    // Event listener for changes in the number of hidden layers
+    document.getElementById("hiddenLayersDropdown").addEventListener("change", updateHiddenLayers);
 });
+
 
 
 class CustomCallback2 extends tf.Callback {
