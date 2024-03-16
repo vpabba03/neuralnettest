@@ -9,6 +9,24 @@ let model2;
 import {drawGraph} from './script.js';
 
 
+window.addEventListener('DOMContentLoaded', (event) => {
+    // Event listener for changes in the number of nodes
+    document.getElementById("nodesDropdown3").addEventListener("change", function () {
+        nodesValue2[0] = parseInt(this.value);
+        draw();
+    })
+    document.getElementById("nodesDropdown4").addEventListener("change", function () {
+        nodesValue2[1] = parseInt(this.value);
+        draw();
+    });
+
+    document.getElementById("nodesDropdown5").addEventListener("change", function () {
+        nodesValue2[2] = parseInt(this.value);
+        draw();
+    });
+});
+
+
 class CustomCallback2 extends tf.Callback {
     onBatchEnd(epoch, logs) {
         let weights;
@@ -49,36 +67,19 @@ function createComplexModel() {
     let model2 = tf.sequential();
     model2.add(tf.layers.dense({ inputShape: [13], units: nodesValue2[0], useBias: true, activation: 'relu' }));
 
+    // Add hidden layers based on the selected number of nodes
     for (let i = 1; i < hiddenLayersValue2; i++) {
         model2.add(tf.layers.dense({ units: nodesValue2[i], activation: 'relu', useBias: true }));
     }
 
+    // Add output layer
     model2.add(tf.layers.dense({ units: 1, useBias: true }));
-    const myOptimizer = tf.train.sgd(.001) 
+    const myOptimizer = tf.train.sgd(.001);
     model2.compile({ loss: 'meanSquaredError', optimizer: myOptimizer });
     return model2;
 }
 
-function draw2() {
-    if (isInitialSetup2) {
-        let svg = d3.select("#neuralNet2").append("svg")
-            .attr("width", width)
-            .attr("height", height);
-        networkGraph2 = buildNodeGraph2();
-        drawGraph(networkGraph2, svg);
-        isInitialSetup2 = false;
-        svg.selectAll(".link").style("stroke-opacity", .4)
-    } else {
-        let svg = d3.select("#neuralNet2").select("svg")
-        svg.selectAll("*").remove()
-        console.log("drawing   " + new Date());
-        networkGraph2 = buildNodeGraph2();
-        drawGraph(networkGraph2, svg);
-    }
-    model2 = createComplexModel();
-}
-
-function buildNodeGraph2() {
+function buildNodeGraph2(hiddenLayersValue2, nodesValue2) {
     let newGraph = {
         "nodes": []
     };
@@ -116,5 +117,25 @@ function buildNodeGraph2() {
     console.log(newGraph);
     return newGraph;
 }
+
+function draw2() {
+    if (isInitialSetup2) {
+        let svg = d3.select("#neuralNet2").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+        networkGraph2 = buildNodeGraph2(hiddenLayersValue2, nodesValue2); // Pass parameters
+        drawGraph(networkGraph2, svg);
+        isInitialSetup2 = false;
+        svg.selectAll(".link").style("stroke-opacity", .4)
+    } else {
+        let svg = d3.select("#neuralNet2").select("svg")
+        svg.selectAll("*").remove()
+        console.log("drawing   " + new Date());
+        networkGraph2 = buildNodeGraph2(hiddenLayersValue2, nodesValue2); // Pass parameters
+        drawGraph(networkGraph2, svg);
+    }
+    model2 = createComplexModel();
+}
+
 
 export {CustomCallback2, trainModel2, createComplexModel, draw2, buildNodeGraph2, hiddenLayersValue2, nodesValue2, networkGraph2, model2};
