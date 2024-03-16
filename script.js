@@ -27,7 +27,7 @@ import { CustomCallback, trainModel, createModel, nodesValue, hiddenLayersValue}
 import {buildNodeGraph3, draw3, linearModel, linearModel2, networkGraph3, trainLinearModel, trainLinearModel2} from './linearregression.js';
 import {generatePredictionMatrix, predictZones, updateHeatmap} from './heatmap.js';
 import {normalRandom, classifyTwoGaussData, classifyCircleData} from './dataset.js';
-import {CustomCallback2, trainModel2, createComplexModel, draw2, buildNodeGraph2, hiddenLayersValue2, nodesValue2, networkGraph2, model2, updateHiddenLayers} from './complexmodel.js';
+import {CustomCallback2, trainModel2, createComplexModel, draw2, buildNodeGraph2, hiddenLayersValue2, nodesValue2, networkGraph2, model2} from './complexmodel.js';
 
 
 
