@@ -13,16 +13,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // Event listener for changes in the number of nodes
     document.getElementById("nodesDropdown3").addEventListener("change", function () {
         nodesValue2[0] = parseInt(this.value);
-        draw();
+        draw2();
     })
     document.getElementById("nodesDropdown4").addEventListener("change", function () {
         nodesValue2[1] = parseInt(this.value);
-        draw();
+        draw2();
     });
 
     document.getElementById("nodesDropdown5").addEventListener("change", function () {
         nodesValue2[2] = parseInt(this.value);
-        draw();
+        draw2();
     });
 });
 
