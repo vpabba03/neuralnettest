@@ -1,7 +1,7 @@
 const width = 1000;
 const height = 600;
 let hiddenLayersValue2 = 3; // Default number of hidden layers 2
-let nodesValue2 = [16, 8, 4]; // Default number of nodes
+let nodesValue2 = [4, 8, 4]; // Default number of nodes
 let isInitialSetup2 = true;
 let networkGraph2;
 let model2;
