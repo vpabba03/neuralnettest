@@ -86,7 +86,7 @@ function buildNodeGraph2(hiddenLayersValue2, nodesValue2) {
 
     // Construct input layer
     let newFirstLayer2 = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 13; i++) {
         let newTempLayer2 = { "label": "i" + i, "layer": 1 };
         newFirstLayer2.push(newTempLayer2);
     }
