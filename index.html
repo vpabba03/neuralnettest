@@ -95,8 +95,21 @@
         <div id="container">
             <h2>Neural Network Visualization</h2>
 
-            <h3>Linear regression simple</h3>
+            <p>What actually happens when you train a neural network? Neural networks have been commonly referred to as being “black boxes”. Despite their widespread use, 
+                most people do not know what they are or how they function, or why they might even be used. In our visualizations, we explore how simple regression models 
+                may generalize to data in simple linear spaces, but fail to accurately capture intricate patterns in data. We will demonstrate how neural networks, in contrast, 
+                excel in modeling intricate datasets and learn complex relationships between variables. </p>
+
+            <h3>Linear Regression on a Simple Dataset</h3>
+            
+            <p>A simple logistic regression model can be visualized as a neural network with no hidden layers, only an input and output layer, as shown below. </p>
+            
             <div id="neuralNet3"></div>
+            
+            <p>When fit to a simple dataset that follows a linear pattern, logistic regression can be an effective method to learn patterns in data. Try pressing the 
+                train button and observe how the logistic regression model learns the boundary between differently labeled points. You should see the heatmap divided in 
+                the middle by a diagonal, similar to how the data it learns from is divided.</p>
+            
             <button type="button" id="lbutton1">Train the model!</button>
 
             <div style="width: 100%; display: flex; justify-content: space-between;">
@@ -108,7 +121,12 @@
                 </div>
             </div>
             <div id="lossPlot1" style="display: none"></div>
-            <h3>Linear regression complex</h3>
+            <h3>Linear Regression on a Complex Dataset</h3>
+
+            <p>However, this same model trained on a complex dataset, such as the one seen below, fails to perform well. Again, try pressing the train button to observe how 
+                logistic regression attempts to learn the pattern in the data. You might see the predictions move around at random during training, and never really settle into 
+                one place. Regardless, the model will fail to learn the shape of the data.</p>
+            
             <button type="button" id="lbutton2">Train the model!</button>
             <div style="width: 100%; display: flex; justify-content: space-between;">
                 <div style="width: 48%;">
@@ -120,9 +138,22 @@
             </div>
             <div id="lossPlot2" style="display: none"></div>
 
-            <h3>Hidden Layer complex</h3>
+            <h3>Hidden Layers on a Complex Dataset</h3>
 
-            <h3>What is a neural network?</h3>
+            <p>This is where neural networks become important. By introducing additional hidden layers and neurons to the neural network architecture, we 
+                observe an enhanced ability to accurately capture the intricacies of the complex dataset. </p>
+            <p>The hidden layers within a neural network are composed of neurons that receive inputs consisting of linear combinations of weights and input values. 
+                These neurons then utilize an activation function to process these inputs, thereby enabling the network to gain nonlinearity and learn more effective representations 
+                of the data. In our specific model, we used a RELU activation function, which serves to ascertain whether the output value from the preceding layer surpasses 
+                a predetermined threshold.</p>
+            <p>The overarching purpose of the additional hidden layers and neurons in each layer is to learn the relationships between each feature. You might notice from comparing the logistic 
+                regression model to the neural network model that each individual neuron of the network is almost identical to the logistic regression model. By including and combining these neurons, 
+                neural networks can learn much more information then just a simple logistic regression.</p>
+            <p>Try experimenting with the model parameters below and observe the effect on the size of the model on how fast or effectively the model learns the pattern in the data. In addition, observe the changes 
+                of the weights in the model as it learns. You should see weights grow or disappear, which is the model learning specific relationships between the neurons these weights connect.</p>
+            <p>As an aside, you might notice that sometimes the model will get stuck on a certain pattern and stay at the same loss for the whole training. This occurs because the risk of the model gets stuck on a 
+                local minima and can’t be effectively minimized. This is outside the scope of what we want to illustrate, so if this happens, simply try retraining the model.</p>
+            
 
             <label for="nodesDropdown1">Number of Nodes in First Hidden Layer:</label>
             <select id="nodesDropdown1">
@@ -145,10 +176,6 @@
             
 
             <br>
-
-            <input type="range" name="epochSlider" id="epochSlider" min="1" max="30" step="1" style="height: 30px; padding: 20px;">
-            <span id="epochValue"></span>
-
             <br>
 
             <div style="width: 100%; display: flex; justify-content: space-between;">
@@ -164,6 +191,14 @@
             <br>
 
             <h3>Learning From Real-World Data</h3>
+
+            <p>While showing that a neural network can learn patterns in 2 dimensional synthetic data is cool, the question remains of how 
+                well a neural network can learn complex real world relationships between features and their output.</p>
+
+            <p>Using data from the <a href="https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html">Boston Housing</a> dataset, which contains over 500 data points, 
+                we want to demonstrate the performance of a neural network on real world data. We incorporate the majority of features of the dataset into the input layer and 
+                use them to model a regression problem, predicting the prices of Boston houses. Try experimenting with the various different parameters and explore how additional 
+                complexity allows the model to learn the data more precisely. </p>
 
             <label for="layersDropdown">Number of Hidden Layers:</label>
             <select id="layersDropdown">
@@ -199,6 +234,12 @@
             <div class=" " id="neuralNet2"></div>
             <button type="button" id="tbutton2">Train the model!</button>
             <div id="plot2"></div>
+
+            <h3>Conclusion</h3>
+            <p>In conclusion, we hoped to show how neural networks learn and how the number of parameters affects this learning process. If there is one thing 
+                we want everyone to take away from this project, it would be a better understanding of how neural networks learn complex relationships, in contrast to 
+                simpler models. We hope that we succeed in making it clear how this happens by allowing the viewer to investigate the effects of complexity in a neural 
+                network, as well as by relating the neural network to a simpler model to visualize how they are built up.</p>
         </div>
     </main>
 
